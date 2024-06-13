@@ -107,4 +107,19 @@ class AgendaController extends Controller
             ], 500);
         }
     }
+    
+    public function editarServicosAgenda($id) {
+        try {
+            $user = Auth::user();
+            $response = $this->agendaRepository->editarServicosAgenda($id);
+            $statusCode = $response['status'] === 'success' ? 200 : 400;
+            return response()->json($response, $statusCode);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Ocorreu um erro ao editar os agendamentos do usuário',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

@@ -45,6 +45,7 @@ Route::group(['prefix' => 'V1/api-petshop'], function () {
         Route::post('inserir', [AgendaController::class, 'store']);
         Route::delete('/{id}', [AgendaController::class, 'delete']);
         Route::put('/{id}', [AgendaController::class, 'update']);
+        Route::put('editarServicosAgenda/{id}', [AgendaController::class, 'editarServicosAgenda']);
         Route::get('listar', [AgendaController::class, 'index']);
         Route::middleware('jwt.auth')->group(function () {
             Route::get('listByUser', [AgendaController::class, 'getAgendamentosByUser']);
