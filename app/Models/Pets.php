@@ -9,6 +9,10 @@ class Pets extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'idpet';
+
+    public $incrementing = true;
+
     protected $fillable = [
         'nome', 
         'datanasc', 
@@ -18,4 +22,6 @@ class Pets extends Model
         'altura', 
         'idusuario'
     ];
+
+    public $timestamps = false;
 }

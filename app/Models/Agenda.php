@@ -5,17 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Servicos extends Model
+class Agenda extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'idservico';
+    protected $table = 'agenda';
+
+    protected $primaryKey = 'idagenda';
 
     public $incrementing = true;
 
     protected $fillable = [
-        'nome', 
-        'valor'
+        'data', 
+        'hora', 
+        'idpet', 
+        'idusuario'
     ];
 
     public $timestamps = false;
