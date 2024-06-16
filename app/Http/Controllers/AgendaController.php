@@ -21,7 +21,17 @@ class AgendaController extends Controller
 
     public function index()
     {
-        return $this->agendaRepository->all();
+        try {
+            $agendamentos = $this->agendaRepository->all();
+            
+            return response()->json([
+                'status' => 'success',
+                'data' => $agendamentos,
+            ], 200);
+            
+        } catch (\Exception $e) {
+            return $this->handleError($e);
+        }
     }
 
     public function store(CreateAgendaRequest $request)

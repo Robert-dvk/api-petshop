@@ -12,7 +12,26 @@ class AgendaRepository
 {
     public function all()
     {
-        return Agenda::all();
+        $agendas = Agenda::join('servicosagenda', 'agenda.idagenda', '=', 'servicosagenda.idagenda')
+            ->join('servicos', 'servicosagenda.idservico', '=', 'servicos.idservico')
+            ->join('pets', 'agenda.idpet', '=', 'pets.idpet')
+            ->join('usuarios', 'usuarios.idusuario', '=', 'agenda.idusuario')
+            ->select(
+                'agenda.idagenda as agenda_id',
+                'agenda.data',
+                'agenda.hora',
+                'agenda.idpet',
+                'pets.nome as pet_nome',
+                'usuarios.nome as usuario_nome',
+                'servicos.idservico as servico_id',
+                'servicos.nome as servico_nome',
+                'servicos.valor as servico_valor',
+            )
+            ->get();
+        return [
+            'status' => 'success',
+            'data' => $agendas
+        ];
     }
 
     public function store($data)
@@ -116,7 +135,8 @@ class AgendaRepository
             ->join('servicosagenda', 'agenda.idagenda', '=', 'servicosagenda.idagenda')
             ->join('servicos', 'servicosagenda.idservico', '=', 'servicos.idservico')
             ->join('pets', 'agenda.idpet', '=', 'pets.idpet')
-            ->select('agenda.*', 'servicos.nome as servico_nome', 'pets.nome as pet_nome', 'servicos.idservico as servico_id', 'servicos.valor as servico_valor')
+            ->join('usuarios', 'usuarios.idusuario', '=', 'agenda.idusuario')
+            ->select('agenda.*', 'servicos.nome as servico_nome', 'pets.nome as pet_nome', 'usuarios.nome as usuario_nome', 'servicos.idservico as servico_id', 'servicos.valor as servico_valor')
             ->get();
 
         return [
@@ -145,7 +165,6 @@ class AgendaRepository
                 ];
             }
 
-            // Deleta o serviço existente se houver
             ServicosAgenda::where('idagenda', $id)->delete();
 
             ServicosAgenda::create([
@@ -166,6 +185,4 @@ class AgendaRepository
             ];
         }
     }
-
-
 }
