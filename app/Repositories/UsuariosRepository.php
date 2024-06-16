@@ -12,7 +12,7 @@ class UsuariosRepository
 {
     public function all()
     {
-        return Usuarios::all();
+        return Usuarios::orderBy('nome', 'asc')->get();
     }
 
     public function findByLogin($login)

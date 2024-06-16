@@ -22,8 +22,8 @@ class UsuariosController extends Controller
 
     public function index()
     {
-        return $this->usuariosRepository->all();
-    }
+        return response()->json($this->usuariosRepository->all());
+    }    
 
     public function login(LoginRequest $request)
     {
