@@ -19,7 +19,8 @@ class Pets extends Model
         'sexo', 
         'peso', 
         'porte', 
-        'altura', 
+        'altura',
+        'imagem',
         'idusuario'
     ];
 

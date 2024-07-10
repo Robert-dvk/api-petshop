@@ -22,6 +22,7 @@ class CreatePetRequest extends FormRequest
             'peso' => 'required|numeric',
             'porte' => 'required|string|max:50',
             'altura' => 'required|numeric',
+            'imagem' => 'nullable',
             'idusuario' => 'required|exists:usuarios,idusuario'
         ];
     }

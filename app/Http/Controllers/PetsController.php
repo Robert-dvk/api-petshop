@@ -27,7 +27,10 @@ class PetsController extends Controller
     public function store(CreatePetRequest $request)
     {
         try {
-            $response = $this->petsRepository->store($request);
+            if($request->imagem)
+                $image = $this->saveImage($request->imagem, 'pets');
+
+            $response = $this->petsRepository->store($request, $image);
 
             $statusCode = $response['status'] === 'success' ? 200 : 401;
             
@@ -61,7 +64,9 @@ class PetsController extends Controller
     public function update($id, UpdatePetRequest $request)
     {
         try {
-            $response = $this->petsRepository->update($id, $request->all());
+            if($request->imagem)
+                $image = $this->saveImage($request->imagem, 'pets');
+            $response = $this->petsRepository->update($id, $request->all(), $image);
 
             $statusCode = $response['status'] === 'success' ? 200 : 401;
 
