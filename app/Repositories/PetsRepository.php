@@ -83,14 +83,14 @@ class PetsRepository
 
         $validatedData = $validator->validated();
 
-        if (isset($data['imagem'])) {
-            if ($pet->imagem) {
-                Storage::disk('public')->delete($pet->imagem);
-            }
+        // if (isset($data['imagem'])) {
+        //     if ($pet->imagem) {
+        //         Storage::disk('public')->delete($pet->imagem);
+        //     }
 
-            $path = $data['imagem']->store('pets', 'public');
-            $validatedData['imagem'] = $path;
-        }
+        //     $path = $data['imagem']->store('pets', 'public');
+        //     $validatedData['imagem'] = $path;
+        // }
 
         if ($pet->update($validatedData)) {
             return ['status' => 'success', 'message' => 'Pet atualizado com sucesso'];

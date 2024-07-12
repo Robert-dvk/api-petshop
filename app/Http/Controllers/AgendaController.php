@@ -38,10 +38,8 @@ class AgendaController extends Controller
     {
         try {
             $response = $this->agendaRepository->store($request->validated());
-
-            $statusCode = $response['status'] === 'success' ? 200 : 401;
             
-            return response()->json($response, $statusCode);
+            return response()->json($response, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
@@ -56,9 +54,7 @@ class AgendaController extends Controller
         try {
             $response = $this->agendaRepository->storeServicosAgenda($request->validated());
 
-            $statusCode = $response['status'] === 'success' ? 200 : 401;
-            
-            return response()->json($response, $statusCode);
+            return response()->json($response, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
@@ -73,9 +69,7 @@ class AgendaController extends Controller
         try {
             $response = $this->agendaRepository->delete($id);
 
-            $statusCode = $response['status'] === 'success' ? 200 : 401;
-
-            return response()->json($response, $statusCode);
+            return response()->json($response, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
@@ -90,9 +84,7 @@ class AgendaController extends Controller
         try {
             $response = $this->agendaRepository->update($id, $request->validated());
 
-            $statusCode = $response['status'] === 'success' ? 200 : 401;
-
-            return response()->json($response, $statusCode);
+            return response()->json($response, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',

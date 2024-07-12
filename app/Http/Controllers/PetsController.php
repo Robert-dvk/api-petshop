@@ -31,10 +31,8 @@ class PetsController extends Controller
                 $image = $this->saveImage($request->imagem, 'pets');
 
             $response = $this->petsRepository->store($request, $image);
-
-            $statusCode = $response['status'] === 'success' ? 200 : 401;
             
-            return response()->json($response, $statusCode);
+            return response()->json($response, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
@@ -64,13 +62,14 @@ class PetsController extends Controller
     public function update($id, UpdatePetRequest $request)
     {
         try {
-            if($request->imagem)
+            if($request->imagem) {
                 $image = $this->saveImage($request->imagem, 'pets');
+            } else {
+                $image = null;
+            }
             $response = $this->petsRepository->update($id, $request->all(), $image);
 
-            $statusCode = $response['status'] === 'success' ? 200 : 401;
-
-            return response()->json($response, $statusCode);
+            return response()->json($response, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
